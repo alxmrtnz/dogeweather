@@ -25,21 +25,22 @@ $ip = get_client_ip(); // the IP address to query
 //$ip = "180.76.6.19";
 
 $query = @unserialize(file_get_contents('http://ip-api.com/php/'.$ip));
-if($query && $query['status'] == 'sucscess') {
+if($query && $query['status'] == 'success') {
   //get Coords
   $lat = $query['lat'];
   $lon = $query['lon'];
-	$city = $query['city'];
+    $city = $query['city'];
 
-  $url = "http://api.openweathermap.org/data/2.5/weather?lat={$lat}&lon={$lon}";
+  $url = "http://api.openweathermap.org/data/2.5/forecast/daily?lat={$lat}&lon={$lon}&cnt=2";
+
   //$url = "http://api.openweathermap.org/data/2.5/weather?q={$city}&APPID=test";
 
-  	$djson = file_get_contents($url);
-	echo $djson;
+    $djson = file_get_contents($url);
+    echo $djson;
 
 } else {
-  	$url = "http://api.openweathermap.org/data/2.5/weather?q=Paris";
-  	$djson = file_get_contents($url);
-	echo $djson;
+    $url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Paris";
+    $djson = file_get_contents($url);
+    echo $djson;
 }
 ?>
